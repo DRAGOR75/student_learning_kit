@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:student_learning_kit/components/background_image.dart';
 import 'package:student_learning_kit/components/my_button.dart';
 import 'package:student_learning_kit/components/textfiled.dart';
 import 'dart:developer';
+
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
 
@@ -66,85 +68,88 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: Colors.grey,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height:50),
-              //logo
-              const SafeArea(
-                child: Icon(Icons.lock,
-                  size: 50,
+    return  Stack(
+      children: [
+        BackgroundImage(),
+        Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height:50),
+                //logo
+                const SafeArea(
+                  child: Icon(Icons.face_6_rounded,
+                    color: Colors.white,
+                    size: 80,
+                  ),
+
+                ),
+                const SizedBox(height:50),
+                //wellcome you have been missed
+                const Text('Start Your New journey',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),),
+                const SizedBox(height: 15,),
+                //user name text field
+                SizedBox(width: 700,
+                  child: Mytextfield(controller: emailController,
+                    hintText: 'Email',
+                    obscureText: false,),
                 ),
 
-              ),
-              const SizedBox(height:50),
-              //wellcome you have been missed
-              const Text('Start Your New journey',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),),
-              const SizedBox(height: 15,),
-              //user name text field
-              Mytextfield(controller: emailController,
-                hintText: 'username',
-                obscureText: false,),
-
-              const SizedBox(height: 15,),
-              //password text field
-              Mytextfield(controller: passwordController,
-                hintText: 'password',
-                obscureText: true,),
-
-              const SizedBox(height: 15,),
-
-              Mytextfield(controller: confirmPasswordController,
-                  hintText: ' confirm password',
-                  obscureText: false),
-
-              const SizedBox(height: 15,),
-              // fotgot password
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal:25.0),
-                child:  Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap:widget.onTap,
-                      child: Text('Forgot Password?',
-                          style:TextStyle(color: Colors.black)),
-                    ),
-                  ],
+                const SizedBox(height: 15,),
+                //password text field
+                SizedBox(width: 700,
+                  child: Mytextfield(controller: passwordController,
+                    hintText: 'password',
+                    obscureText: true,),
                 ),
-              ),
-              const SizedBox(height: 25,),
 
-              //signin button
+                const SizedBox(height: 15,),
 
-              MyButton(
-                onTap: signUsernUp,
-              ),
-              const SizedBox(height: 25,),
+                SizedBox(width: 700,
+                  child: Mytextfield(controller: confirmPasswordController,
+                      hintText: ' confirm password',
+                      obscureText: false),
+                ),
 
-              //not a member register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Already have an account?,",
-                  style: const TextStyle(
-                    color: Colors.blue,
+                const SizedBox(height: 15,),
+                // fotgot password
 
-                  ),)
-                ],
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:25.0),
+                  child:  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap:widget.onTap,
+                        child: Text('Already have an account',
+                            style:TextStyle(color: Colors.white)),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 25,),
+
+                //signin button
+
+                MyButton(
+                  onTap: signUsernUp,
+                ),
+                const SizedBox(height: 25,),
+
+                //not a member register now
+
+              ],
+            ),
           ),
         ),
       ),
+    ],
     );
   }
 }
