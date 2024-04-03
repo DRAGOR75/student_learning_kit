@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:student_learning_kit/components/background_image.dart';
 import 'package:student_learning_kit/pages/books_page.dart';
+import 'package:student_learning_kit/pages/note_homepage.dart';
 import 'package:student_learning_kit/pages/quiz_page.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
@@ -23,7 +24,7 @@ class HomePage extends StatelessWidget {
         MaterialApp(
           debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.yellow,
             title: Image.asset('assets/images/Learn It.png',
@@ -43,9 +44,9 @@ class HomePage extends StatelessWidget {
 
           body: Stack(
             children:[
-              WebsafeSvg.asset('assets/images/Untitled-design.svg',
-              fit: BoxFit.fill,
-              colorFilter: ColorFilter.mode(Colors.purple, BlendMode.hardLight)),
+              //WebsafeSvg.asset('assets/images/Untitled-design.svg',
+              //it: BoxFit.fill,
+              //colorFilter: ColorFilter.mode(Colors.transparent, BlendMode.colorDodge)),
               Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -62,7 +63,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 120),
                 Expanded(
                   child: GridView.count(
-                    crossAxisCount: 6,
+                    crossAxisCount: 5,
                     mainAxisSpacing: 25,
                     crossAxisSpacing: 16,
                     padding: EdgeInsets.all(16),
@@ -70,16 +71,17 @@ class HomePage extends StatelessWidget {
                       _buildCard(context, 'Books', Icons.people, onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const BooksPage()));
                       }),
-                      _buildCard(context, 'Notes', Icons.school, onPressed: () {}),
+                      _buildCard(context, 'Notes', Icons.school, onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  NotesHomePage()));
+                      }),
                       _buildCard(context, 'Quiz', Icons.class_, onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const QuizPage()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  QuizHome()));
                       }),
                       _buildCard(context, 'QP', Icons.check_circle,
                           onPressed: () {}),
                       _buildCard(context, 'FAQ', Icons.assignment,
                           onPressed: () {}),
-                      _buildCard(context, 'Reports', Icons.bar_chart,
-                          onPressed: () {}),
+
                     ],
                   ),
                 ),
@@ -100,13 +102,14 @@ class HomePage extends StatelessWidget {
         child: Card(
             elevation: 4,
             color: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   icon,
                   size: 48,
-                  color: Colors.deepPurple,
+                  color: Colors.yellow,
                 ),
                 SizedBox(height: 16),
                 Text(

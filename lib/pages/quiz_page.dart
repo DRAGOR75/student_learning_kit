@@ -1,65 +1,116 @@
-import 'dart:ffi';
-
-import 'package:websafe_svg/websafe_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:student_learning_kit/components/background_image.dart';
+import 'package:student_learning_kit/pages/home_page.dart';
+import 'package:student_learning_kit/pages/quiz_screen_maths.dart';
 
-class QuizPage extends StatelessWidget {
-  const QuizPage({super.key});
+class QuizHome extends StatelessWidget {
+  const QuizHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [],
-      ),
-      body: Stack(
-        children: [
-          WebsafeSvg.asset('assets/images/Untitled-design.svg',
-              fit:BoxFit.fill),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      border: Border.all(color:Color(0xFF3F4768), width: 3),
-                      borderRadius: BorderRadius.circular(50)
-                    ),
-                    child: Stack(
-                      children: [
-                        LayoutBuilder(
-                          builder:(context,constraints)=>Container(
-                            width: constraints.maxWidth*0.5,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("18 sec"),
-                                  Icon(Icons.punch_clock)
-                                ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+    return Stack(
+      children: [
+        BackgroundImage(),
+        MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            backgroundColor: Colors.deepPurple[900],
+            appBar: AppBar(
+              backgroundColor: Colors.yellow,
+              title: Image.asset('assets/images/Learn It.png',
+                fit: BoxFit.scaleDown,
+                scale: 3,),
+
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.notifications),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  HomePage()));
+                  },
+                ),
+              ],
             ),
-          )
-        ],
+
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Text(
+                    'Lets Check Your Knowledge',
+                    style: TextStyle(fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+
+                const SizedBox(height:28),
+                Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 5,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 16,
+                    padding: EdgeInsets.all(16),
+                    children: [
+                      _buildCard(context, 'Maths', Icons.format_list_numbered_outlined, onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> QuizScreen()));
+                      }),
+                      _buildCard(context, 'Science', Icons.science, onPressed: () {}),
+                      _buildCard(context, 'Social Science', Icons.people_alt, onPressed: () {}),
+                      _buildCard(context, 'English', Icons.abc,
+                          onPressed: () {}),
+                      _buildCard(context, 'Programming', Icons.people,
+                          onPressed: () {}),
+
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 28),
+
+
+              ],
+
+            ),
+
+
+          ),
+        ),
+      ],
+    );
+  }
+  Widget _buildCard(BuildContext context, String title, IconData icon,
+      {VoidCallback? onPressed}) {
+    return InkWell(
+      onTap: onPressed,
+      child:SizedBox(
+        height: 100,
+        width: 200,
+
+        child: Card(
+          elevation: 4,
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 48,
+                color: Colors.deepPurple,
+              ),
+              SizedBox(height: 16),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
