@@ -15,9 +15,9 @@ Widget build(BuildContext context) {
     onPressed: onPressed,
     child: SizedBox(
       height: 50,
-      width: double.infinity,
+      width: 100,
       child: Card(
-        color: onPressed != null ? Colors.white24 : null,
+        color: onPressed != null ? Colors.yellow : null,
         child: Center(
           child: Text(
             label,

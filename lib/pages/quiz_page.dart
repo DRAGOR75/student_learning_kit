@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:student_learning_kit/components/background_image.dart';
 import 'package:student_learning_kit/pages/home_page.dart';
+import 'package:student_learning_kit/pages/quiz-screen_e.dart';
 import 'package:student_learning_kit/pages/quiz_screen_maths.dart';
+import 'package:student_learning_kit/pages/quiz_screen_programing.dart';
+import 'package:student_learning_kit/pages/quiz_screen_s.dart';
+import 'package:student_learning_kit/pages/quiz_screen_ss.dart';
 
 class QuizHome extends StatelessWidget {
   const QuizHome({super.key});
@@ -14,10 +18,10 @@ class QuizHome extends StatelessWidget {
         MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Scaffold(
-            backgroundColor: Colors.deepPurple[900],
+            backgroundColor: Colors.deepPurpleAccent,
             appBar: AppBar(
               backgroundColor: Colors.yellow,
-              title: Image.asset('assets/images/Learn It.png',
+              title: Image.asset('assets/images/learn_it.png',
                 fit: BoxFit.scaleDown,
                 scale: 3,),
 
@@ -57,14 +61,22 @@ class QuizHome extends StatelessWidget {
                     padding: EdgeInsets.all(16),
                     children: [
                       _buildCard(context, 'Maths', Icons.format_list_numbered_outlined, onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> QuizScreenM()));
+                      }),
+                      _buildCard(context, 'Science', Icons.science, onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> QuizScreenS()));
+                      }),
+                      _buildCard(context, 'Social Science', Icons.people_alt, onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> QuizScreen()));
                       }),
-                      _buildCard(context, 'Science', Icons.science, onPressed: () {}),
-                      _buildCard(context, 'Social Science', Icons.people_alt, onPressed: () {}),
                       _buildCard(context, 'English', Icons.abc,
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> QuizScreenE()));
+                          }),
                       _buildCard(context, 'Programming', Icons.people,
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> QuizScreenP()));
+                          }),
 
                     ],
                   ),

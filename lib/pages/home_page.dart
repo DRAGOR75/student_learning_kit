@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:student_learning_kit/components/background_image.dart';
+import 'package:student_learning_kit/navigation/books_navigate.dart';
 import 'package:student_learning_kit/pages/books_page.dart';
 import 'package:student_learning_kit/pages/note_homepage.dart';
 import 'package:student_learning_kit/pages/quiz_page.dart';
 import 'package:websafe_svg/websafe_svg.dart';
+
+import '../navigation/question_paper_navigate.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -26,9 +30,12 @@ class HomePage extends StatelessWidget {
         home: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            backgroundColor: Colors.yellow,
-            title: Image.asset('assets/images/Learn It.png',
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Image.asset('assets/images/learn_it.png',
             fit: BoxFit.scaleDown,
+            width: 100,
+
             scale: 3,),
 
             actions: [
@@ -53,10 +60,12 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'WELCOME USER!!!',
-                    style: TextStyle(fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    'Welcome User',
+                    style: GoogleFonts.pacifico(
+                      fontSize: 40,
+                      color: Colors.yellow,
+                      fontWeight: FontWeight.bold,
+                    )
                   ),
                 ),
 
@@ -69,16 +78,18 @@ class HomePage extends StatelessWidget {
                     padding: EdgeInsets.all(16),
                     children: [
                       _buildCard(context, 'Books', Icons.people, onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const BooksPage()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SchoolDashboard()));
                       }),
                       _buildCard(context, 'Notes', Icons.school, onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  NotesHomePage()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  const NotesHomePage()));
                       }),
                       _buildCard(context, 'Quiz', Icons.class_, onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  QuizHome()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  const QuizHome()));
                       }),
                       _buildCard(context, 'QP', Icons.check_circle,
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  const QuestionPaperDashboard()));
+                          }),
                       _buildCard(context, 'FAQ', Icons.assignment,
                           onPressed: () {}),
 
@@ -109,7 +120,7 @@ class HomePage extends StatelessWidget {
                 Icon(
                   icon,
                   size: 48,
-                  color: Colors.yellow,
+                  color: Colors.deepPurpleAccent,
                 ),
                 SizedBox(height: 16),
                 Text(

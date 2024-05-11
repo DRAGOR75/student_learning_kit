@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 
-import 'package:student_learning_kit/models/questions_Socialscience.dart';
+import 'package:student_learning_kit/models/questions_maths.dart';
 import 'package:student_learning_kit/pages/quiz_result_screen.dart';
 import 'package:student_learning_kit/components/answer_card.dart';
 import 'package:student_learning_kit/components/next_button.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class QuizScreenM extends StatefulWidget {
+  const QuizScreenM({super.key});
 
   @override
-  State<QuizScreen> createState() => _QuizScreenState();
+  State<QuizScreenM> createState() => _QuizScreenStateM();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenStateM extends State<QuizScreenM> {
   int? selectedAnswerIndex;
   int questionIndex = 0;
   int score = 0;
 
   void pickAnswer(int value) {
     selectedAnswerIndex = value;
-    final question = questions[questionIndex];
-    if (selectedAnswerIndex == question.correctAnswerIndex) {
+    final question = questionsM[questionIndex];
+    if (selectedAnswerIndex == question.correctAnswerIndexM) {
       score++;
     }
     setState(() {});
   }
 
   void goToNextQuestion() {
-    if (questionIndex < questions.length - 1) {
+    if (questionIndex < questionsM.length - 1) {
       questionIndex++;
       selectedAnswerIndex = null;
     }
@@ -36,11 +36,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final question = questions[questionIndex];
-    bool isLastQuestion = questionIndex == questions.length - 1;
+    final question = questionsM[questionIndex];
+    bool isLastQuestion = questionIndex == questionsM.length - 1;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Maths'),
+        backgroundColor: Colors.yellow,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -48,7 +49,7 @@ class _QuizScreenState extends State<QuizScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              question.question,
+              question.questionM,
               style: const TextStyle(
                 fontSize: 21,
               ),
@@ -56,7 +57,7 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: question.options.length,
+              itemCount: question.optionsM.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: selectedAnswerIndex == null
@@ -64,10 +65,10 @@ class _QuizScreenState extends State<QuizScreen> {
                       : null,
                   child: AnswerCard(
                     currentIndex: index,
-                    question: question.options[index],
+                    question: question.optionsM[index],
                     isSelected: selectedAnswerIndex == index,
                     selectedAnswerIndex: selectedAnswerIndex,
-                    correctAnswerIndex: question.correctAnswerIndex,
+                    correctAnswerIndex: question.correctAnswerIndexM,
                   ),
                 );
               },

@@ -12,10 +12,10 @@ class BooksPage extends StatelessWidget {
         MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Scaffold(
-            backgroundColor: Colors.deepPurple[900],
+            backgroundColor: Colors.deepPurpleAccent,
             appBar: AppBar(
               backgroundColor: Colors.yellow,
-              title: Image.asset('assets/images/Learn It.png',
+              title: Image.asset('assets/images/learn_it.png',
                 fit: BoxFit.scaleDown,
                 scale: 3,),
 
